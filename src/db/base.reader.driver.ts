@@ -35,4 +35,17 @@ export class BaseReaderDriver {
         }
     }
 
+    async save(item: unknown) {
+        try {
+            const data = await this.get();
+
+            data.push(item)
+
+            await fs.writeFileSync(this.pathName, JSON.stringify([]), 'utf-8');
+            return data;
+        } catch(e) {
+            throw new Error(e)
+        }
+    }
+
 }
